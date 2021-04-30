@@ -24,7 +24,10 @@ function App() {
 
 
   useEffect(() => {
-    fetchDataOnRender();
+
+    // if(!movieList) {
+    //   fetchDataOnRender();
+    // }
     // console.log('did update', queryInfo)
     if (queryInfo.length > 0) {
 
@@ -76,27 +79,6 @@ function App() {
 
 
 
-  const fetchDataOnRender = async () => {
-    try {
-
-      const res = await fetch(`http://www.omdbapi.com/?apikey=5b14df79&s=avengers`)
-      const data = await res.json("");
-      // console.log('Movie Data: ', data);
-      if (data.Response === "False") {
-        console.log(data.Error);
-        setError(true);
-        setMovieList([]);
-
-        return;
-      }
-      setError(false);
-      setMovieList([...data.Search]);
-    } catch (err) {
-      console.log(err)
-
-    }
-
-  }
 
 
   const selectMovie = (movieId) => {
@@ -126,6 +108,8 @@ function App() {
             return a.Title < b.Title ? -1 : 1
           case dropDown[1]:
             return a.Title < b.Title ? 1 : -1
+          default: 
+            return '';
         }
       })
 
