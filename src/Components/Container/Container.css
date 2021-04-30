@@ -1,0 +1,6 @@
+.container {
+    height: 80vh;
+    overflow-y: scroll;
+    width: 450px;
+    background: #d8d8d8;
+}
