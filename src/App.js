@@ -27,10 +27,47 @@ function App() {
     fetchDataOnRender();
     // console.log('did update', queryInfo)
     if (queryInfo.length > 0) {
+
+
+      const searchData = async () => {
+
+        try {
+
+          const res = await fetch(`http://www.omdbapi.com/?apikey=5b14df79&s=${queryInfo}`)
+          const data = await res.json("");
+          // console.log('Movie Data: ', data);
+          if (data.Response === "False") {
+            console.log(data.Error);
+            setError(true);
+            setMovieList([]);
+            setSelectedMovie();
+
+            return;
+          }
+          setError(false);
+          setMovieList([...data.Search]);
+        } catch (err) {
+          console.log(err)
+
+        }
+
+      }
+
+
       searchData();
+
     }
 
     if (selectedMovieId.length > 0) {
+
+      const fetchPlotData = async () => {
+
+        const res = await fetch(`http://www.omdbapi.com/?apikey=5b14df79&i=${selectedMovieId}&plot=full`)
+        const data = await res.json("");
+        // console.log('plot data: ', data);
+        setSelectedMovie(data);
+        // console.log(movieList);
+      }
       fetchPlotData();
     }
 
@@ -61,38 +98,6 @@ function App() {
 
   }
 
-  const searchData = async () => {
-
-    try {
-
-      const res = await fetch(`http://www.omdbapi.com/?apikey=5b14df79&s=${queryInfo}`)
-      const data = await res.json("");
-      // console.log('Movie Data: ', data);
-      if (data.Response === "False") {
-        console.log(data.Error);
-        setError(true);
-        setMovieList([]);    
-        setSelectedMovie();
-
-        return;
-      }
-      setError(false);
-      setMovieList([...data.Search]);
-    } catch (err) {
-      console.log(err)
-
-    }
-
-  }
-
-  const fetchPlotData = async () => {
-
-    const res = await fetch(`http://www.omdbapi.com/?apikey=5b14df79&i=${selectedMovieId}&plot=full`)
-    const data = await res.json("");
-    // console.log('plot data: ', data);
-    setSelectedMovie(data);
-    // console.log(movieList);
-  }
 
   const selectMovie = (movieId) => {
     console.log('this has been clicked', movieId)
@@ -115,38 +120,38 @@ function App() {
 
     setMovieList(prevMovies => {
       const sortedMovies = [...prevMovies]
-        sortedMovies.sort((a,b) => {
-          switch (selectedItem) {
-            case dropDown[0]:
-              return a.Title < b.Title ? -1 : 1
-            case dropDown[1]:
-              return a.Title < b.Title ? 1 : -1
-          }
-        })
-  
-        return sortedMovies
+      sortedMovies.sort((a, b) => {
+        switch (selectedItem) {
+          case dropDown[0]:
+            return a.Title < b.Title ? -1 : 1
+          case dropDown[1]:
+            return a.Title < b.Title ? 1 : -1
+        }
       })
- 
+
+      return sortedMovies
+    })
+
   }
 
 
 
   return (
     <div className="App">
-    
+
       <Header />
       <Search searchInfo={searchInfo} setSearchInfo={setSearchInfo} setQueryInfo={setQueryInfo} />
- 
+
       <Menu menuItem={dropDown} selected={selected} sort={sortMovies} />
 
-      { 
-         error && 
-         <div className="error">
-        <img className="error-dog" src={dogLogoErr} alt="error" />
+      {
+        error &&
+        <div className="error">
+          <img className="error-dog" src={dogLogoErr} alt="error" />
         Movie Not Found
          </div>
 
-       
+
       }
       <div className="movie">
         {
