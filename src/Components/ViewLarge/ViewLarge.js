@@ -4,7 +4,7 @@ import './ViewLarge.css';
 function ViewLarge({ selectedMovie }) {
     // console.log('View ', selectedMovie.selectedMovie)
 
-    const { BoxOffice, Genre, Plot, Rated, Title, Released, Runtime, Ratings, Poster, imdbRating } = selectedMovie
+    const { BoxOffice, Genre, Plot, Rated, Title, Released, Poster, imdbRating } = selectedMovie
 
     // console.log(Title, Poster)
 

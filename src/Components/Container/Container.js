@@ -8,9 +8,9 @@ function Container({ movieList, selectMovie }) {
     // console.log('container', movieList)
 
 
-    const selected = () => {
-        console.log('hello')
-    }
+    // const selected = () => {
+    //     console.log('hello')
+    // }
 
     return (
         <Droppable droppableId="movies">

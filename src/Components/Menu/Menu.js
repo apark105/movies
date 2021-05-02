@@ -9,11 +9,6 @@ function Menu({ menuItem, selected, sort }) {
 
     let count = 0;
 
-    const selectedItem = (e) => {
-        // console.log(e.target.innerText)
-        // sort(e.target.innerText)
-        // setSelected(e.target.innerText)
-    }
 
 
     const clickedMenu = () => {

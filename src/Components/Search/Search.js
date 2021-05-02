@@ -7,7 +7,7 @@ function Search({ searchInfo, setSearchInfo, setQueryInfo }) {
 
     const handleInput = (e) => {
         e.preventDefault();
-        console.log(e.target.value)
+        // console.log(e.target.value)
         let info = e.target.value
         setSearchInfo(info)
 
@@ -15,7 +15,7 @@ function Search({ searchInfo, setSearchInfo, setQueryInfo }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submitted')
+        // console.log('submitted')
         setQueryInfo(searchInfo);
         setSearchInfo("");
     }
