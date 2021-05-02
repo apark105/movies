@@ -49,6 +49,7 @@ function App() {
           console.log(err)
         }
         setQueryInfo("");
+        setSelected("Sort");
 
       }
       searchData();
